@@ -55,32 +55,32 @@ def get_column(df, column_ix):
     cnt_rows = df.shape[0]
     lst = []
     for i in range(cnt_rows):
-        lst.append(df.iat[i,2])
+        lst.append(df.iat[i, column_ix])
     return lst
     
 def meet_email(field):
-    return '@' in field
+    return '@' in str(field)
+    
+def meet_telphon(field):
+    return '095' in str(field)
     
     
 # Обработчик нажатия кнопки
-def process_button():
+def process_button():    
     file_name = do_dialog()
     label_01['text'] = file_name
     df = pandas_read_csv(file_name)
-    lst = get_column(df, 2)    
-    for item in lst:
-        output_text.insert(tk.END, str(item) + os.linesep)
-
-    counter_total = 0
-    counter_meet = 0
-    for list_item in lst:
-        counter_total += 1
-        if meet_email(list_item):
-            counter_meet += 1
-    if counter_meet / counter_total > 0.5:
-        mb.showinfo(title=None, message="Емейлы!")
-                
-    mb.showinfo(title=None, message="Готово")
+    cnt_columns = df.shape[1]    
+    for column_ix in range(cnt_columns):
+        lst = get_column(df, column_ix)    
+        counter_total = 0
+        counter_meet = 0                      
+        for list_item in lst:
+            counter_total += 1
+            if meet_email(list_item):
+                counter_meet += 1            
+        if counter_meet / counter_total > 0.5:                           
+            mb.showinfo(title=None, message="Готово")
 
 # Создание кнопки
 button=tk.Button(window, text="Прочитать файл", command=process_button)
