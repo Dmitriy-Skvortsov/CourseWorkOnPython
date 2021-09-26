@@ -89,7 +89,7 @@ def process_button():
         if counter_meet / counter_total > 0.5:
             output_text.insert(tk.END, "столбец " + str(column_ix+1) + " Емейлы!" + os.linesep)                        
         if counter_meet1 / counter_total > 0.5:
-            output_text.insert(tk.END, "столбец " + str(column_ix+1) + " Телефон!" + os.linesep)
+            output_text.insert(tk.END, "столбец " + str(column_ix+1) + " Телефоны!" + os.linesep)
     mb.showinfo(title=None, message="Готово")
 
 # Создание кнопки
