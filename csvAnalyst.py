@@ -79,8 +79,9 @@ def process_button():
             counter_total += 1
             if meet_email(list_item):
                 counter_meet += 1            
-        if counter_meet / counter_total > 0.5:                           
-            mb.showinfo(title=None, message="Готово")
+        if counter_meet / counter_total > 0.5:
+            output_text.insert(tk.END, "столбец " + str(column_ix+1) + " Емейлы!" + os.linesep)                
+    mb.showinfo(title=None, message="Готово")
 
 # Создание кнопки
 button=tk.Button(window, text="Прочитать файл", command=process_button)
