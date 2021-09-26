@@ -62,7 +62,11 @@ def meet_email(field):
     return '@' in str(field)
     
 def meet_telphon(field):
-    return '095' in str(field)
+    str_field=str(field)
+    if '(' in str_field or ')' in str_field or '+' in str_field:
+        return True
+    else:
+        return False
     
     
 # Обработчик нажатия кнопки
@@ -73,14 +77,19 @@ def process_button():
     cnt_columns = df.shape[1]    
     for column_ix in range(cnt_columns):
         lst = get_column(df, column_ix)    
-        counter_total = 0
-        counter_meet = 0                      
+        counter_total = 0        
+        counter_meet = 0               
+        counter_meet1 = 0                              
         for list_item in lst:
             counter_total += 1
             if meet_email(list_item):
-                counter_meet += 1            
+                counter_meet += 1
+            if meet_telphon(list_item):
+                counter_meet1 += 1
         if counter_meet / counter_total > 0.5:
-            output_text.insert(tk.END, "столбец " + str(column_ix+1) + " Емейлы!" + os.linesep)                
+            output_text.insert(tk.END, "столбец " + str(column_ix+1) + " Емейлы!" + os.linesep)                        
+        if counter_meet1 / counter_total > 0.5:
+            output_text.insert(tk.END, "столбец " + str(column_ix+1) + " Телефон!" + os.linesep)
     mb.showinfo(title=None, message="Готово")
 
 # Создание кнопки
